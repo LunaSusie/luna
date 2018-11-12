@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using luna.EntityFrameworkCore;
 
 namespace luna.Migrations
 {
     [DbContext(typeof(lunaDbContext))]
-    partial class lunaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181112070623_clear_abp_prefix")]
+    partial class clear_abp_prefix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

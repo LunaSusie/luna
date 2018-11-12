@@ -3,6 +3,8 @@ using Abp.Zero.EntityFrameworkCore;
 using luna.Authorization.Roles;
 using luna.Authorization.Users;
 using luna.MultiTenancy;
+using JetBrains.Annotations;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace luna.EntityFrameworkCore
 {
@@ -13,6 +15,13 @@ namespace luna.EntityFrameworkCore
         public lunaDbContext(DbContextOptions<lunaDbContext> options)
             : base(options)
         {
+           
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            //清楚abp前缀
+            modelBuilder.ChangeAbpTablePrefix<Tenant, Role, User>(null);
         }
     }
 }

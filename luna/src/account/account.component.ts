@@ -3,7 +3,7 @@ import { LoginService } from './login/login.service';
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
-    selector:'layout-passport',
+    selector:'account-layout',
     templateUrl: './account.component.html',
     styleUrls: ['./account.component.less']
 })

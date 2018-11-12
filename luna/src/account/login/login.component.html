@@ -1,90 +1,65 @@
-﻿
-<div [@routerTransition]>
-  <form nz-form #loginForm="ngForm" role="form" novalidate (ngSubmit)="login()" method="post" class="login-form">
-    <nz-tabset [nzAnimated]="false" class="tabs" (nzSelectChange)="switch($event)">
-      <nz-tab nzTitle="账户密码登录">
-        <!-- 账号 -->
-        <nz-form-item>
-          <nz-form-control>
-            <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
-              <input nz-input [(ngModel)]="loginService.authenticateModel.userNameOrEmailAddress"
-                #userNameOrEmailAddressInput="ngModel" name=" userNameOrEmailAddress" [placeholder]="l('UserNameOrEmail')"
-                required maxlength="255">
-            </nz-input-group>
-          </nz-form-control>
-        </nz-form-item>
-        <!--密码 -->
-        <nz-form-item>
-          <nz-form-control>
-            <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-lock">
-              <input nz-input [(ngModel)]="loginService.authenticateModel.password" #userNameOrEmailAddressInput="ngModel"
-                name="password" type="password" [placeholder]="l('password')" required maxlength="255">
-            </nz-input-group>
-          </nz-form-control>
-        </nz-form-item>
-      </nz-tab>
-      <nz-tab nzTitle="手机号登录">
-         <!-- 手机 -->
-         <nz-form-item>
-            <nz-form-control>
-              <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
-                  <!-- [(ngModel)]="loginService.authenticateModel.userNameOrEmailAddress"
-                  #userNameOrEmailAddressInput="ngModel" name=" userNameOrEmailAddress" -->
-                <input nz-input name=“mobile”
-                  placeholder="手机号码"
-                  required maxlength="255">
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-          <!--验证码 -->
-          <nz-form-item>
-            <nz-form-control>
-              <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-mail">
-                  <!-- [(ngModel)]="loginService.authenticateModel.password" 
-                  #userNameOrEmailAddressInput="ngModel" name="password"-->
-                <input nz-input name="captcha"
-                  placeholder="验证码" required maxlength="255">
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-      </nz-tab>
-     </nz-tabset>
-      <!--记住我和忘记密码 -->
+﻿<form nz-form #loginForm="ngForm" role="form" novalidate (ngSubmit)="login()" method="post" [@routerTransition]>
+  <nz-tabset [nzAnimated]="false" class="tabs">
+    <nz-tab nzTitle="账户密码登录">
+      <!-- 账号 -->
       <nz-form-item>
-        <nz-col [nzSpan]="12">
-          <label nz-checkbox [(ngModel)]="loginService.rememberMe" name="rememberMe" id="rememberme">
-            <span>{{l("RememberMe")}}</span>
-          </label>
-        </nz-col>
-        <nz-col [nzSpan]="12" class="text-right">
-          <a routerLink="/account/forgot-password" class="forgot">{{l("ForgotPassword")}}</a>
-        </nz-col>
+        <nz-form-control>
+          <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
+            <input nz-input [(ngModel)]="loginService.authenticateModel.userNameOrEmailAddress"
+              #userNameOrEmailAddressInput="ngModel" name=" userNameOrEmailAddress" [placeholder]="l('UserNameOrEmail')"
+              required maxlength="255">
+          </nz-input-group>
+          <nz-form-explain *ngIf="userNameOrEmailAddressInput.dirty && userNameOrEmailAddressInput.errors"> 请输入用户名！</nz-form-explain>
+        </nz-form-control>
       </nz-form-item>
-      <!-- 登陆按钮 -->
+      <!--密码 -->
       <nz-form-item>
-        <button nz-button [nzType]="primary" [nzLoading]="submitting" [nzSize]="large" [disabled]="!loginForm.form.valid||submitting"
-          nzBlock>
-          <i nz-icon type="login"></i>
-          <span>{{l("LogIn")}}</span>
-        </button>
+        <nz-form-control>
+          <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-lock">
+            <input nz-input [(ngModel)]="loginService.authenticateModel.password" 
+              #passwordInput="ngModel" name="password"
+              type="password" [placeholder]="l('Password')" required maxlength="255">
+          </nz-input-group>
+          <nz-form-explain *ngIf="passwordInput.dirty && passwordInput.errors"> 请输入密码！</nz-form-explain>
+        </nz-form-control>
       </nz-form-item>
-  </form>
-  <!-- 注册 -->
-  <div class="other">
-    <span *ngIf="isSelfRegistrationAllowed">
-      <a routerLink="/account/register">{{l("CreateAnAccount")}}</a>
-      <nz-divider nzType="vertical"></nz-divider>
-    </span>
-    <!-- 租户注册 -->
-    <span *ngIf="!appSession.tenantId">
-      <a routerLink="/account/tenant-register">{{l("TenantRegister")}}</a>
-      <nz-divider nzType="vertical"></nz-divider>
-    </span>
-    <!-- //todo: 等待有缘人帮我们完善吧 -->
-    <span>
-      <a routerLink="/account/email-activation">{{l("EmailActivation")}}</a>
-    </span>
-  </div>
+    </nz-tab>
+  </nz-tabset>
+  <!--记住我和忘记密码 -->
+  <nz-form-item>
+    <nz-col [nzSpan]="12">
+      <label nz-checkbox [(ngModel)]="loginService.rememberMe" name="rememberMe" id="rememberme">
+        <span>{{l("RememberMe")}}</span>
+      </label>
+    </nz-col>
+    <nz-col [nzSpan]="12" class="text-right">
+      <a routerLink="/account/forgot-password" class="forgot">{{l("ForgotPassword")}}</a>
+    </nz-col>
+  </nz-form-item>
+  <!-- 登陆按钮 -->
+  <nz-form-item>
+    <button nz-button [nzType]="primary" [nzLoading]="submitting" [nzSize]="large" [disabled]="!loginForm.form.valid||submitting"
+      nzBlock>
+      <i nz-icon type="login"></i>
+      <span>{{l("LogIn")}}</span>
+    </button>
+  </nz-form-item>
+</form>
+<!-- 注册 -->
+<div class="other">
+  <span *ngIf="isSelfRegistrationAllowed">
+    <a routerLink="/account/register">{{l("CreateAnAccount")}}</a>
+    <nz-divider nzType="vertical"></nz-divider>
+  </span>
+  <!-- 租户注册 -->
+  <span *ngIf="!appSession.tenantId">
+    <a routerLink="/account/tenant-register">{{l("CreateNewTenant")}}</a>
+    <nz-divider nzType="vertical"></nz-divider>
+  </span>
+  <!-- //todo: 等待有缘人帮我们完善吧 -->
+  <span>
+    <a routerLink="/account/email-activation">{{l("EmailActivation")}}</a>
+  </span>
 </div>
 <!-- <form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form" [@routerTransition]>
     <nz-tabset [nzAnimated]="false" class="tabs" (nzSelectChange)="switch($event)">

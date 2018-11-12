@@ -1,5 +1,4 @@
-﻿import { Component, Injector, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+﻿import { Component, Injector, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { LoginService } from './login.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
@@ -10,10 +9,9 @@ import { AbpSessionService } from '@abp/session/abp-session.service';
     styleUrls: ['./login.component.less'],
     animations: [accountModuleAnimation()]
 })
-export class LoginComponent extends AppComponentBase {
-    // @ViewChild('cardBody') cardBody: ElementRef;
+export class LoginComponent extends AppComponentBase implements AfterViewInit{
+     @ViewChild('loginForm') loginForm: ElementRef;
     // submitting: boolean = false;
-    loginType = 0;
     constructor(
         injector: Injector,
         public loginService: LoginService,
@@ -21,25 +19,21 @@ export class LoginComponent extends AppComponentBase {
     ) {
         super(injector);
     }
-
-    // ngAfterViewInit(): void {
-    //     $(this.cardBody.nativeElement).find('input:first').focus();
-    // }
+   
+    ngAfterViewInit(): void {
+        $(this.loginForm.nativeElement).find('input:first').focus();
+    }
 
     get multiTenancySideIsTeanant(): boolean {
         return this._sessionService.tenantId > 0;
     }
 
     get isSelfRegistrationAllowed(): boolean {
-        // if (!this._sessionService.tenantId) {
-        //     return false;
-        // }
+        if (!this._sessionService.tenantId) {
+            return false;
+        }
         return true;
     }
-    
-    switch(ret: any) {
-        this.loginType = ret.index;
-      }
 
     // login(): void {
     //     this.submitting = true;

@@ -8,9 +8,6 @@ import { AppComponentBase } from '@shared/app-component-base';
     templateUrl: './tenant-change.component.html'
 })
 export class TenantChangeComponent extends AppComponentBase implements OnInit {
-    
-    @ViewChild('tenantChangeModal') tenantChangeModal: TenantChangeModalComponent;
-
     tenancyName: string;
     name: string;
 
@@ -34,6 +31,7 @@ export class TenantChangeComponent extends AppComponentBase implements OnInit {
     }
 
     showChangeModal(): void{
-        this.tenantChangeModal.show(this.tenancyName);
+        this.modalService.open(TenantChangeModalComponent,{tenancyName:this.tenancyName},'md',{nzMask:true}).subscribe(()=>{});
+        //this.tenantChangeModal.show(this.tenancyName);
     }
 }

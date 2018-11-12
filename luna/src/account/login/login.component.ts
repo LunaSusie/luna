@@ -11,7 +11,7 @@ import { AbpSessionService } from '@abp/session/abp-session.service';
 })
 export class LoginComponent extends AppComponentBase implements AfterViewInit{
      @ViewChild('loginForm') loginForm: ElementRef;
-    // submitting: boolean = false;
+    logining: boolean = false;
     constructor(
         injector: Injector,
         public loginService: LoginService,
@@ -35,10 +35,10 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit{
         return true;
     }
 
-    // login(): void {
-    //     this.submitting = true;
-    //     this.loginService.authenticate(
-    //         () => this.submitting = false
-    //     );
-    // }
+    login(): void {
+        this.logining = true;
+        this.loginService.authenticate(
+            () => this.logining = false
+        );
+    }
 }

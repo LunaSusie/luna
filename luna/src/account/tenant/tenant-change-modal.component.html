@@ -1,36 +1,32 @@
-﻿<!-- <div bsModal #tenantChangeModal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tenantChangeModal" aria-hidden="true" [config]="{backdrop: 'static'}">
-    <div class="modal-dialog">
-
-        <div #modalContent class="modal-content">
-
-            <form *ngIf="active" #changeTenantForm="ngForm" novalidate (ngSubmit)="save()">
-
-                <div class="modal-header">
-                    <button type="button" class="close" (click)="close()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">
-                        <span>{{l("ChangeTenant")}}</span>
-                    </h4>
-                </div>
-
-                <div class="modal-body">
-                    <div class="form-group form-float">
-                        <div class="form-line">
-                            <input #tenancyNameInput materialInput  type="text" name="TenancyName" class="form-control" [ngClass]="{'edited':tenancyName}" [(ngModel)]="tenancyName" maxlength="64">
-                            <label class="form-label">{{l("TenancyName")}}</label>
-                        </div>
-                    </div>
-                    <span class="help-block">{{l("LeaveEmptyToSwitchToHost")}}</span>
-                </div>
-
-                <div class="modal-footer">
-                    <button [disabled]="saving" type="button" class="btn btn-default waves-effect" (click)="close()">{{l("Cancel")}}</button>
-                    <button type="submit" class="btn btn-primary waves-effect" [disabled]="!changeTenantForm.form.valid">{{l("Save")}}</button>
-                </div>
-
-            </form>
-
-        </div>
+﻿﻿<form nz-form #changeTenantForm="ngForm" (ngSubmit)="save()">
+    <div class="modal-header">
+      <div class="modal-title">
+        <i class="anticon anticon-home"></i> {{l("ChangeTenant")}}
+      </div>
     </div>
-</div> -->
+    <fieldset>
+      <nz-form-item nz-row>
+        <nz-form-label nz-col [nzSm]="4" nzFor="TenancyName">
+          {{l("TenancyName")}}
+        </nz-form-label>
+        <nz-form-control nz-col [nzSm]="20">
+          <nz-input-group nzPrefixIcon="anticon anticon-home">
+            <input nz-input name="TenancyName" [(ngModel)]="tenancyName" type="text" [placeholder]="l('TenancyName')" [nzSize]="'large'"
+            />
+          </nz-input-group>
+          <span class="text-sm text-grey">{{l("LeaveEmptyToSwitchToHost")}}</span>
+  
+        </nz-form-control>
+      </nz-form-item>
+    </fieldset>
+  
+    <div class="modal-footer">
+      <button nz-button [nzType]="'default'" [nzSize]="'large'" type="button" (click)="close()" [disabled]="saving">
+        <i class="anticon anticon-close-circle-o"></i> {{l("Cancel")}}
+      </button>
+      <button nz-button [nzType]="'primary'" [nzSize]="'large'" type="submit" [disabled]="!changeTenantForm.form.valid" [disabled]="saving"
+        [nzLoading]="saving">
+        <i class="anticon anticon-save"></i> {{l("Save")}}
+      </button>
+    </div>
+  </form>

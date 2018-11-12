@@ -31,6 +31,8 @@ namespace luna.Authorization.Accounts.Dto
         [DisableAuditing]
         public string Password { get; set; }
 
+       
+
         [DisableAuditing]
         public string CaptchaResponse { get; set; }
 

@@ -42,7 +42,8 @@ import { LoginService } from './login/login.service';
     ],
     providers: [
         LoginService
-    ]
+    ],
+    entryComponents:[TenantChangeModalComponent]
 })
 export class AccountModule {
 

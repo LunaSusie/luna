@@ -31,6 +31,7 @@ import { AppSessionService } from './session/app-session.service';
 import { AppUrlService } from './nav/app-url.service';
 import { AppAuthService } from './auth/app-auth.service';
 import { AppRouteGuard } from './auth/auth-route-guard';
+import { ModalService } from './modal/modal.service';
 
 const PROVIDERS = [AppSessionService,AppUrlService,AppAuthService,AppRouteGuard];
 // #endregion
@@ -69,7 +70,8 @@ const PROVIDERS = [AppSessionService,AppUrlService,AppAuthService,AppRouteGuard]
     // your components
     ...COMPONENTS,
     ...DIRECTIVES
-  ]
+  ],
+  providers:[ModalService]
 })
 export class SharedModule {
   static forRoot() : ModuleWithProviders{

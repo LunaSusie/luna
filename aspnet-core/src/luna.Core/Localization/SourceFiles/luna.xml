@@ -93,6 +93,7 @@
     <text name="Settings">Settings</text>
     
     <text name="ForgotPassword">Forgot Password</text>
-    
+    <text name="Loginwithexistingaccounts">Login with existing accounts</text>
+
   </texts>
 </localizationDictionary>

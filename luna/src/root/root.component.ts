@@ -13,5 +13,4 @@ export class RootComponent implements OnInit {
       ngOnInit(){
         AppConsts.overrideAbpMessageByMini(this._notifyService);
       }
-    
 }

@@ -21,17 +21,8 @@ export class AppConsts {
     };
 
  //覆盖abp.message替换为ng-zorro的全局message
-  static overrideAbpMessageByMini(
-    _nzMessageService: NzMessageService,
-    _nzModalService?: NzModalService,
+  static overrideAbpMessageByMini(_nzMessageService: NzMessageService
   ) {
-    if (_nzModalService) {
-      if ((<any>abp).nzModal) {
-        return;
-      }
-
-      (<any>abp).nzModal = _nzModalService;
-    }
     if ((<any>abp).nzMessage) {
       return;
     }
@@ -60,9 +51,7 @@ export class AppConsts {
     if ((<any>abp).nzModal) {
       return;
     }
-
     (<any>abp).nzModal = _nzModalService;
-
     abp.message.info = (message: string, title?: string) => {
       (<any>abp).nzModal.info({
         nzTitle: title,
@@ -117,7 +106,7 @@ export class AppConsts {
     };
   }
 
-  // msg confirm
+  // message confirm
   private static confirm(
     message: string,
     callback?: (result: boolean) => void,
@@ -161,4 +150,5 @@ export class AppConsts {
       });
     }
   }
+  
 }

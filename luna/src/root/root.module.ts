@@ -90,13 +90,13 @@ export function getCurrentLanguage(): string {
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        DelonModule.forRoot(),
-        SharedModule.forRoot(),
-        AbpModule,
         ServiceProxyModule,
         RootRoutingModule,
         HttpClientModule,
-        NgZorroAntdModule
+        NgZorroAntdModule,
+        DelonModule.forRoot(),
+        SharedModule.forRoot(),
+        AbpModule,
     ],
     declarations: [
         RootComponent

@@ -5,40 +5,30 @@ import { IsTenantAvailableInput, IsTenantAvailableOutput } from '@shared/service
 import { AppTenantAvailabilityState } from '@shared/AppEnums';
 
 import { finalize } from 'rxjs/operators';
+import { NzModalRef } from 'ng-zorro-antd';
 
 @Component({
     selector: 'tenantChangeModal',
     templateUrl: './tenant-change-modal.component.html'
 })
 export class TenantChangeModalComponent extends AppComponentBase {
-
-    @ViewChild('tenancyNameInput') tenancyNameInput: ElementRef;
-    @ViewChild('modalContent') modalContent: ElementRef;
-
+    
     tenancyName: string = '';
-    active: boolean = false;
     saving: boolean = false;
 
     constructor(
         private _accountService: AccountServiceProxy,
+        private _modal: NzModalRef,
         injector: Injector
     ) {
         super(injector);
     }
 
-    show(tenancyName: string): void {
-        this.tenancyName = tenancyName;
-        this.active = true;
-    }
-
-    onShown(): void {
-        $(this.tenancyNameInput.nativeElement).focus().select();
-    }
 
     save(): void {
-
+        //为空则默认host用户
         if (!this.tenancyName) {
-            abp.multiTenancy.setTenantIdCookie(undefined);;
+            abp.multiTenancy.setTenantIdCookie(undefined);
             this.close();
             location.reload();
             return;
@@ -66,8 +56,7 @@ export class TenantChangeModalComponent extends AppComponentBase {
                 }
             });
     }
-
-    close(): void {
-        this.active = false;
+    close():void{
+        this._modal.destroy();
     }
 }

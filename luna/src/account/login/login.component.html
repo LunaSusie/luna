@@ -38,9 +38,8 @@
   </nz-form-item>
   <!-- 登陆按钮 -->
   <nz-form-item>
-    <button nz-button [nzType]="primary" [nzLoading]="logining" [nzSize]="large" [disabled]="!loginForm.form.valid||logining"
+    <button nz-button nzType="primary" nzSize="large" type="submit" [nzLoading]="loading" class="submit" [disabled]="!loginForm.form.valid||logining"
       nzBlock>
-      <i nz-icon type="login"></i>
       <span>{{l("LogIn")}}</span>
     </button>
   </nz-form-item>
